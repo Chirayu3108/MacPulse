@@ -2,9 +2,10 @@ import psutil
 
 class SystemMonitor:
 # CPU USAGE
-  def get_cpu_usage(self) -> None:
+  def get_cpu_usage(self):
     cpu_avg = psutil.cpu_percent(interval=1)
     cpu_cores = psutil.cpu_percent(percpu=True)
+   
 
 
   
@@ -19,11 +20,19 @@ class SystemMonitor:
 # Disk Usage
 
   def get_disk_usage(self):
-    disk_usage = psutil.disk_usage('/')
-    print(f"{disk_usage.total / (1024**3):.2f}GB")
-  
+    total_disk = psutil.disk_usage('/')
+    disk_total = f"{total_disk.total / (1024**3):.2f}GB"
+    disk_used = f"{total_disk.used / (1024**3):.2f}GB"
+    disk_free = f"{total_disk.free / (1024**3):.2f}GB"
+    disk_usage_percentage = f"{total_disk.percent}%"
 
-comp = SystemMonitor()
-comp.get_disk_usage()
+# Battery Status
+  def get_battery_status(self):
+    battery = psutil.sensors_battery()
+    bat_percent = f"{battery.percent}%" if battery is not None else "N/A"
+    bat_charge = f"{battery.power_plugged}" if battery is not None else "N/A"
+    bat_run_out = f"{battery.secsleft / 60} mins" if battery is not None else "N/A"
+
+    
 
 
