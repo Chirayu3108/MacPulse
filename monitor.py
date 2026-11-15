@@ -50,8 +50,8 @@ class SystemMonitor:
       
       if battery.secsleft == psutil.POWER_TIME_UNLIMITED:
         charging_text = "The device is plugged in. Battery life is unlimited!"
-      #elif battery.secsleft == psutil.POWER_TIME_UNKNOWN:
-       # charging_text = "Calculating remaining time..."
+      elif battery.secsleft == psutil.POWER_TIME_UNKNOWN:
+        charging_text = "Calculating remaining time..."
       else:
         charging_text = battery.secsleft//60
     else:
@@ -68,5 +68,5 @@ class SystemMonitor:
       "battery_run_out_in": bat_run_out
     }
 
-# Testing all 
+
 
